@@ -1,10 +1,11 @@
 ﻿using System;
+using MLAPI;
 using UnityEngine;
 
 /// <summary>
 /// <para>This component consumes input on the InputReader and stores its values. The input is then read, and manipulated, by the StateMachines's Actions.</para>
 /// </summary>
-public class Protagonist : MonoBehaviour
+public class Protagonist : NetworkBehaviour
 {
 	[SerializeField] private InputReader _inputReader = default;
 	public TransformAnchor gameplayCameraTransform;
@@ -33,12 +34,28 @@ public class Protagonist : MonoBehaviour
 		lastHit = hit;
 	}
 
+	public override void OnNetworkSpawn()
+	{
+		if (!IsClient || !IsLocalPlayer)
+		{
+			enabled = false;
+			return;
+		}
+
+		GetComponent<LocalPlayer>().MoveVector.OnValueChanged += OnValueChanged;
+	}
+
+	void OnValueChanged(Vector2 previousvalue, Vector2 newvalue)
+	{
+		OnMove(newvalue);
+	}
+
 	//Adds listeners for events being triggered in the InputReader script
 	private void OnEnable()
 	{
 		_inputReader.jumpEvent += OnJumpInitiated;
 		_inputReader.jumpCanceledEvent += OnJumpCanceled;
-		_inputReader.moveEvent += OnMove;
+		//_inputReader.moveEvent += OnMove;
 		_inputReader.startedRunning += OnStartedRunning;
 		_inputReader.stoppedRunning += OnStoppedRunning;
 		_inputReader.attackEvent += OnStartedAttack;
@@ -50,7 +67,7 @@ public class Protagonist : MonoBehaviour
 	{
 		_inputReader.jumpEvent -= OnJumpInitiated;
 		_inputReader.jumpCanceledEvent -= OnJumpCanceled;
-		_inputReader.moveEvent -= OnMove;
+		//_inputReader.moveEvent -= OnMove;
 		_inputReader.startedRunning -= OnStartedRunning;
 		_inputReader.stoppedRunning -= OnStoppedRunning;
 		_inputReader.attackEvent -= OnStartedAttack;
@@ -119,7 +136,6 @@ public class Protagonist : MonoBehaviour
 
 	private void OnMove(Vector2 movement)
 	{
-
 		_inputVector = movement;
 	}
 

@@ -1,6 +1,9 @@
 {
     "name": "UOP1.StateMachine",
-    "references": [],
+    "rootNamespace": "",
+    "references": [
+        "GUID:1491147abca9d7d4bb7105af628b223e"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

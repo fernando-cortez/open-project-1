@@ -117,7 +117,12 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
 	public void OnMove(InputAction.CallbackContext context)
 	{
-		moveEvent.Invoke(context.ReadValue<Vector2>());
+		if (LocalPlayer.Instance)
+		{
+			LocalPlayer.Instance.MoveVector.Value = context.ReadValue<Vector2>();
+		}
+
+		//moveEvent.Invoke(context.ReadValue<Vector2>());
 	}
 
 	public void OnRun(InputAction.CallbackContext context)

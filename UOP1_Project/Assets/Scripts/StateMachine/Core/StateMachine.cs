@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using MLAPI;
 using UnityEngine;
 
 namespace UOP1.StateMachine
 {
-	public class StateMachine : MonoBehaviour
+	public class StateMachine : NetworkBehaviour
 	{
 		[Tooltip("Set the initial state of this StateMachine")]
 		[SerializeField] private ScriptableObjects.TransitionTableSO _transitionTableSO = default;
@@ -43,6 +44,14 @@ namespace UOP1.StateMachine
 			UnityEditor.AssemblyReloadEvents.afterAssemblyReload -= OnAfterAssemblyReload;
 		}
 #endif
+
+		public override void OnNetworkSpawn()
+		{
+			if (!IsClient || !IsLocalPlayer)
+			{
+				enabled = false;
+			}
+		}
 
 		private void Start()
 		{
