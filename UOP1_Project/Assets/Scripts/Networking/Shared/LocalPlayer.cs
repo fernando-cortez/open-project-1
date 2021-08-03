@@ -1,5 +1,5 @@
-using MLAPI;
-using MLAPI.NetworkVariable;
+using Unity.Multiplayer.Netcode;
+using Unity.Multiplayer.Netcode.NetworkVariable;
 using UnityEngine;
 
 public class LocalPlayer : NetworkBehaviour
@@ -7,6 +7,11 @@ public class LocalPlayer : NetworkBehaviour
 	public static LocalPlayer Instance { get; private set; }
 
 	public NetworkVariableVector2 MoveVector = new NetworkVariableVector2(new NetworkVariableSettings()
+	{
+		WritePermission = NetworkVariablePermission.OwnerOnly
+	});
+
+	public NetworkVariableBool Shoot = new NetworkVariableBool(new NetworkVariableSettings()
 	{
 		WritePermission = NetworkVariablePermission.OwnerOnly
 	});

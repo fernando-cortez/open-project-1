@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MLAPI;
+using Unity.Multiplayer.Netcode;
 using UnityEngine;
 
 namespace UOP1.StateMachine
@@ -47,7 +47,7 @@ namespace UOP1.StateMachine
 
 		public override void OnNetworkSpawn()
 		{
-			if (!IsClient || !IsLocalPlayer)
+			if (!IsServer)
 			{
 				enabled = false;
 			}

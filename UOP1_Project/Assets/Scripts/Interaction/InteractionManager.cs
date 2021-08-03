@@ -36,6 +36,11 @@ public class InteractionManager : MonoBehaviour
 	// Called mid-way through the AnimationClip of collecting
 	private void Collect()
 	{
+		if (_potentialInteractions.First == null)
+		{
+			return;
+		}
+
 		GameObject itemObject = _potentialInteractions.First.Value.interactableObject;
 		_potentialInteractions.RemoveFirst();
 
@@ -93,6 +98,7 @@ public class InteractionManager : MonoBehaviour
 	{
 		Interaction newPotentialInteraction = new Interaction(InteractionType.None, obj);
 
+		// TODO: make this data driven
 		if (obj.CompareTag("Pickable"))
 		{
 			newPotentialInteraction.type = InteractionType.PickUp;

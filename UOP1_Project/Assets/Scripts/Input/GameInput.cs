@@ -89,6 +89,14 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""b3cc38cb-afc4-44b7-8443-ad83c85ae405"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -485,6 +493,17 @@ public class @GameInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""KeyboardOrGamepad"",
                     ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a82ea54f-8d13-4de3-b01e-cddcb582ef3e"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardOrGamepad"",
+                    ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1663,6 +1682,7 @@ public class @GameInput : IInputActionCollection, IDisposable
         m_Gameplay_RotateCamera = m_Gameplay.FindAction("RotateCamera", throwIfNotFound: true);
         m_Gameplay_MouseControlCamera = m_Gameplay.FindAction("MouseControlCamera", throwIfNotFound: true);
         m_Gameplay_Run = m_Gameplay.FindAction("Run", throwIfNotFound: true);
+        m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
         // Menus
         m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
         m_Menus_MoveSelection = m_Menus.FindAction("MoveSelection", throwIfNotFound: true);
@@ -1740,6 +1760,7 @@ public class @GameInput : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_RotateCamera;
     private readonly InputAction m_Gameplay_MouseControlCamera;
     private readonly InputAction m_Gameplay_Run;
+    private readonly InputAction m_Gameplay_Shoot;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -1753,6 +1774,7 @@ public class @GameInput : IInputActionCollection, IDisposable
         public InputAction @RotateCamera => m_Wrapper.m_Gameplay_RotateCamera;
         public InputAction @MouseControlCamera => m_Wrapper.m_Gameplay_MouseControlCamera;
         public InputAction @Run => m_Wrapper.m_Gameplay_Run;
+        public InputAction @Shoot => m_Wrapper.m_Gameplay_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1789,6 +1811,9 @@ public class @GameInput : IInputActionCollection, IDisposable
                 @Run.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
                 @Run.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
                 @Run.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRun;
+                @Shoot.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -1820,6 +1845,9 @@ public class @GameInput : IInputActionCollection, IDisposable
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
             }
         }
     }
@@ -2014,6 +2042,7 @@ public class @GameInput : IInputActionCollection, IDisposable
         void OnRotateCamera(InputAction.CallbackContext context);
         void OnMouseControlCamera(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
     public interface IMenusActions
     {

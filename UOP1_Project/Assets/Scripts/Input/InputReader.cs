@@ -125,6 +125,22 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 		//moveEvent.Invoke(context.ReadValue<Vector2>());
 	}
 
+	public void OnShoot(InputAction.CallbackContext context)
+	{
+		if (LocalPlayer.Instance)
+		{
+			switch (context.phase)
+			{
+				case InputActionPhase.Performed:
+					LocalPlayer.Instance.Shoot.Value = true;
+					break;
+				case InputActionPhase.Canceled:
+					LocalPlayer.Instance.Shoot.Value = false;
+					break;
+			}
+		}
+	}
+
 	public void OnRun(InputAction.CallbackContext context)
 	{
 		switch (context.phase)

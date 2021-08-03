@@ -1,5 +1,5 @@
 ﻿using System;
-using MLAPI;
+using Unity.Multiplayer.Netcode;
 using UnityEngine;
 
 /// <summary>
@@ -17,6 +17,8 @@ public class Protagonist : NetworkBehaviour
 	[NonSerialized] public bool jumpInput;
 	[NonSerialized] public bool extraActionInput;
 	[NonSerialized] public bool attackInput;
+	//[NonSerialized]
+	public bool shootInput;
 	[NonSerialized] public Vector3 movementInput; //Initial input coming from the Protagonist script
 	[NonSerialized] public Vector3 movementVector; //Final movement vector, manipulated by the StateMachine actions
 	[NonSerialized] public ControllerColliderHit lastHit;
@@ -36,18 +38,28 @@ public class Protagonist : NetworkBehaviour
 
 	public override void OnNetworkSpawn()
 	{
-		if (!IsClient || !IsLocalPlayer)
+		if (!IsServer)
 		{
 			enabled = false;
 			return;
 		}
 
-		GetComponent<LocalPlayer>().MoveVector.OnValueChanged += OnValueChanged;
+		GetComponent<LocalPlayer>().MoveVector.OnValueChanged += PlayerMoved;
+
+		GetComponent<LocalPlayer>().Shoot.OnValueChanged += PlayerShot;
 	}
 
-	void OnValueChanged(Vector2 previousvalue, Vector2 newvalue)
+	void PlayerMoved(Vector2 previousValue, Vector2 newValue)
 	{
-		OnMove(newvalue);
+		OnMove(newValue);
+	}
+
+	void PlayerShot(bool previousValue, bool newValue)
+	{
+		if (newValue)
+		{
+			shootInput = true;
+		}
 	}
 
 	//Adds listeners for events being triggered in the InputReader script
@@ -155,6 +167,8 @@ public class Protagonist : NetworkBehaviour
 
 
 	private void OnStartedAttack() => attackInput = true;
+
+	public void ConsumeShootInput() => shootInput = false;
 
 	// Triggered from Animation Event
 	public void ConsumeAttackInput() => attackInput = false;

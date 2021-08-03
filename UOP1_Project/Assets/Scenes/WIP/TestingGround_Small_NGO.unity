@@ -538,11 +538,17 @@ MonoBehaviour:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 158398892}
     RegisteredScenes:
-    - TestingGround_Small_MLAPI
+    - TestingGround_Small_NGO
     AllowRuntimeSceneChanges: 0
     PlayerPrefab: {fileID: 309633228405838073, guid: e5ff5dd1677263f489ed09352c14ab98,
       type: 3}
-    NetworkPrefabs: []
+    NetworkPrefabs:
+    - Override: 0
+      Prefab: {fileID: 8857480764593392265, guid: 0527b6d51795bd64595af1fc4c9b2bf7,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
@@ -3824,17 +3830,17 @@ PrefabInstance:
     - target: {fileID: 2808035858438402709, guid: 45632f0a227c860489bcba0eb1f4ec3e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.10224989
+      value: 0.102249905
       objectReference: {fileID: 0}
     - target: {fileID: 2808035858438402709, guid: 45632f0a227c860489bcba0eb1f4ec3e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.08917597
+      value: -0.08917595
       objectReference: {fileID: 0}
     - target: {fileID: 2808035858438402709, guid: 45632f0a227c860489bcba0eb1f4ec3e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.024490183
+      value: 0.024490178
       objectReference: {fileID: 0}
     - target: {fileID: 2955398947125553842, guid: 45632f0a227c860489bcba0eb1f4ec3e,
         type: 3}
@@ -3959,12 +3965,12 @@ PrefabInstance:
     - target: {fileID: 8745341642014614482, guid: 45632f0a227c860489bcba0eb1f4ec3e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1.4378575e-17
+      value: 1.4378573e-17
       objectReference: {fileID: 0}
     - target: {fileID: 8745341642014614482, guid: 45632f0a227c860489bcba0eb1f4ec3e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -2.9078008e-18
+      value: -2.9078006e-18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45632f0a227c860489bcba0eb1f4ec3e, type: 3}
