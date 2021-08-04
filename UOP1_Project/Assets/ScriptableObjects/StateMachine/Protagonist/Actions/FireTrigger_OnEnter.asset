@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c70afd7f911db7449d578cc18700875, type: 3}
-  m_Name: ShootTrigger_OnEnter
+  m_Name: FireTrigger_OnEnter
   m_EditorClassIdentifier: 
   parameterType: 3
   parameterName: PickUp

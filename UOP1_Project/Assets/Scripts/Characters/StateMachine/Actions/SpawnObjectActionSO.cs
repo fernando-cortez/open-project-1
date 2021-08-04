@@ -3,18 +3,18 @@ using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
-[CreateAssetMenu(fileName = "ApplyMovementVector", menuName = "State Machines/Actions/Spawn Object")]
-public class SpawnObjectSO : StateActionSO<SpawnObject>
+[CreateAssetMenu(fileName = "SpawnObjectAction", menuName = "State Machines/Actions/Spawn Object Action")]
+public class SpawnObjectActionSO : StateActionSO<SpawnObjectAction>
 {
 	public GameObject objectToSpawn;
 }
 
-public class SpawnObject : StateAction
+public class SpawnObjectAction : StateAction
 {
 	//Component references
 	private Protagonist _protagonistScript;
 
-	private SpawnObjectSO _originSO => (SpawnObjectSO)base.OriginSO; // The SO this StateAction spawned from
+	private SpawnObjectActionSO _originSO => (SpawnObjectActionSO)base.OriginSO; // The SO this StateAction spawned from
 
 	public override void Awake(StateMachine stateMachine)
 	{

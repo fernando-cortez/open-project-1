@@ -78,7 +78,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Shoot",
+                    "name": "Fire",
                     "type": "Button",
                     "id": "b3cc38cb-afc4-44b7-8443-ad83c85ae405",
                     "expectedControlType": "Button",
@@ -490,7 +490,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardOrGamepad",
-                    "action": "Shoot",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

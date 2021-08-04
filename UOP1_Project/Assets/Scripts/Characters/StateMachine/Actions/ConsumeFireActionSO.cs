@@ -2,10 +2,10 @@ using UnityEngine;
 using UOP1.StateMachine;
 using UOP1.StateMachine.ScriptableObjects;
 
-[CreateAssetMenu(fileName = "ApplyMovementVector", menuName = "State Machines/Actions/Consume Shot")]
-public class ConsumeShotActionSO : StateActionSO<ConsumeShotAction> { }
+[CreateAssetMenu(fileName = "ConsumeFireAction", menuName = "State Machines/Actions/Consume Fire Action")]
+public class ConsumeFireActionSO : StateActionSO<ConsumeFireAction> { }
 
-public class ConsumeShotAction : StateAction
+public class ConsumeFireAction : StateAction
 {
 	//Component references
 	private Protagonist _protagonistScript;

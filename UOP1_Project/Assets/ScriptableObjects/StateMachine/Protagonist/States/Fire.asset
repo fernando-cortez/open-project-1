@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35432205b9a6a374bbbfe6b7cac92179, type: 3}
-  m_Name: Shoot
+  m_Name: Fire
   m_EditorClassIdentifier: 
   _actions:
   - {fileID: 11400000, guid: ac9f00bb612653b42891b2d5fc304ae1, type: 2}

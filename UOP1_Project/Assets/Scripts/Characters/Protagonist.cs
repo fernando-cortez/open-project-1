@@ -17,8 +17,7 @@ public class Protagonist : NetworkBehaviour
 	[NonSerialized] public bool jumpInput;
 	[NonSerialized] public bool extraActionInput;
 	[NonSerialized] public bool attackInput;
-	//[NonSerialized]
-	public bool shootInput;
+	public bool FireInput { get; private set; }
 	[NonSerialized] public Vector3 movementInput; //Initial input coming from the Protagonist script
 	[NonSerialized] public Vector3 movementVector; //Final movement vector, manipulated by the StateMachine actions
 	[NonSerialized] public ControllerColliderHit lastHit;
@@ -46,7 +45,7 @@ public class Protagonist : NetworkBehaviour
 
 		GetComponent<LocalPlayer>().MoveVector.OnValueChanged += PlayerMoved;
 
-		GetComponent<LocalPlayer>().Shoot.OnValueChanged += PlayerShot;
+		GetComponent<LocalPlayer>().Fire.OnValueChanged += PlayerFired;
 	}
 
 	void PlayerMoved(Vector2 previousValue, Vector2 newValue)
@@ -54,12 +53,9 @@ public class Protagonist : NetworkBehaviour
 		OnMove(newValue);
 	}
 
-	void PlayerShot(bool previousValue, bool newValue)
+	void PlayerFired(bool previousValue, bool newValue)
 	{
-		if (newValue)
-		{
-			shootInput = true;
-		}
+		FireInput = newValue;
 	}
 
 	//Adds listeners for events being triggered in the InputReader script
@@ -67,7 +63,7 @@ public class Protagonist : NetworkBehaviour
 	{
 		_inputReader.jumpEvent += OnJumpInitiated;
 		_inputReader.jumpCanceledEvent += OnJumpCanceled;
-		//_inputReader.moveEvent += OnMove;
+		/*_inputReader.moveEvent += OnMove;*/
 		_inputReader.startedRunning += OnStartedRunning;
 		_inputReader.stoppedRunning += OnStoppedRunning;
 		_inputReader.attackEvent += OnStartedAttack;
@@ -79,7 +75,7 @@ public class Protagonist : NetworkBehaviour
 	{
 		_inputReader.jumpEvent -= OnJumpInitiated;
 		_inputReader.jumpCanceledEvent -= OnJumpCanceled;
-		//_inputReader.moveEvent -= OnMove;
+		/*_inputReader.moveEvent -= OnMove;*/
 		_inputReader.startedRunning -= OnStartedRunning;
 		_inputReader.stoppedRunning -= OnStoppedRunning;
 		_inputReader.attackEvent -= OnStartedAttack;
@@ -168,7 +164,7 @@ public class Protagonist : NetworkBehaviour
 
 	private void OnStartedAttack() => attackInput = true;
 
-	public void ConsumeShootInput() => shootInput = false;
+	public void ConsumeShootInput() => FireInput = false;
 
 	// Triggered from Animation Event
 	public void ConsumeAttackInput() => attackInput = false;

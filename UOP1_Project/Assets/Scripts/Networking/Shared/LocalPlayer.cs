@@ -11,7 +11,7 @@ public class LocalPlayer : NetworkBehaviour
 		WritePermission = NetworkVariablePermission.OwnerOnly
 	});
 
-	public NetworkVariableBool Shoot = new NetworkVariableBool(new NetworkVariableSettings()
+	public NetworkVariableBool Fire = new NetworkVariableBool(new NetworkVariableSettings()
 	{
 		WritePermission = NetworkVariablePermission.OwnerOnly
 	});

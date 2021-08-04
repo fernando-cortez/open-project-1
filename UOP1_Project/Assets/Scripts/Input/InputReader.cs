@@ -121,21 +121,19 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 		{
 			LocalPlayer.Instance.MoveVector.Value = context.ReadValue<Vector2>();
 		}
-
-		//moveEvent.Invoke(context.ReadValue<Vector2>());
 	}
 
-	public void OnShoot(InputAction.CallbackContext context)
+	public void OnFire(InputAction.CallbackContext context)
 	{
 		if (LocalPlayer.Instance)
 		{
 			switch (context.phase)
 			{
 				case InputActionPhase.Performed:
-					LocalPlayer.Instance.Shoot.Value = true;
+					LocalPlayer.Instance.Fire.Value = true;
 					break;
 				case InputActionPhase.Canceled:
-					LocalPlayer.Instance.Shoot.Value = false;
+					LocalPlayer.Instance.Fire.Value = false;
 					break;
 			}
 		}
