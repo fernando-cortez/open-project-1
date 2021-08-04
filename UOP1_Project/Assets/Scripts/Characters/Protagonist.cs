@@ -43,9 +43,12 @@ public class Protagonist : NetworkBehaviour
 			return;
 		}
 
-		GetComponent<LocalPlayer>().MoveVector.OnValueChanged += PlayerMoved;
+		if (TryGetComponent(out LocalPlayer localPlayer))
+		{
+			localPlayer.MoveVector.OnValueChanged += PlayerMoved;
 
-		GetComponent<LocalPlayer>().Fire.OnValueChanged += PlayerFired;
+			localPlayer.Fire.OnValueChanged += PlayerFired;
+		}
 	}
 
 	void PlayerMoved(Vector2 previousValue, Vector2 newValue)
